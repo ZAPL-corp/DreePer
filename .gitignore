@@ -1,0 +1,18 @@
+# Rust
+src-tauri/target/
+**/*.rs.bk
+Cargo.lock.bak
+
+# предпросмотр UI в браузере
+.preview/
+
+# node (если понадобится tauri-cli через npm)
+node_modules/
+package-lock.json
+
+# система
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.gigatool/

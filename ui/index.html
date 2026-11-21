@@ -1,0 +1,290 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dreeper</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M9 5.2v13.6L20 12z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="7" y="5" width="3.6" height="14" rx="1.2"/><rect x="13.4" y="5" width="3.6" height="14" rx="1.2"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M19 5.2v13.6L8.6 12z"/><rect x="4" y="5" width="2.6" height="14" rx="1.2"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M5 5.2v13.6L15.4 12z"/><rect x="17.4" y="5" width="2.6" height="14" rx="1.2"/></symbol>
+  <symbol id="i-shuffle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 7h3.5c1 0 2 .5 2.6 1.3L16 17h5"/><path d="M3 17h3.5c1 0 2-.5 2.6-1.3L11 13"/><path d="M16 7h5"/><path d="M18.5 4.5 21 7l-2.5 2.5"/><path d="M18.5 14.5 21 17l-2.5 2.5"/>
+  </symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M17 3.5 20 6.5l-3 3"/><path d="M20 6.5H8A4.5 4.5 0 0 0 3.5 11"/><path d="M7 20.5 4 17.5l3-3"/><path d="M4 17.5h12a4.5 4.5 0 0 0 4.5-4.5"/>
+  </symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.3S3.6 15.3 3.6 9.9A4.6 4.6 0 0 1 12 7.2a4.6 4.6 0 0 1 8.4 2.7c0 5.4-8.4 10.4-8.4 10.4z"/></symbol>
+  <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9.2h3.2L12 5.4v13.2l-4.8-3.8H4z"/><path d="M15.2 9a4.4 4.4 0 0 1 0 6M17.8 6.4a8 8 0 0 1 0 11.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9.2h3.2L12 5.4v13.2l-4.8-3.8H4z"/><path d="M15.6 9.6l5 4.8M20.6 9.6l-5 4.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.6" cy="10.6" r="6.4" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M15.4 15.4 21 21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 6.8A1.8 1.8 0 0 1 4.8 5h4.1l2 2.4h8.3A1.8 1.8 0 0 1 21 9.2v8A1.8 1.8 0 0 1 19.2 19H4.8A1.8 1.8 0 0 1 3 17.2z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+  <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V6.4l10-2v11.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="6.6" cy="18" r="2.6"/><circle cx="16.6" cy="15.6" r="2.6"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7.5h9M18.5 7.5H20M4 16.5h1.5M11 16.5h9"/><circle cx="15.5" cy="7.5" r="2.4"/><circle cx="7.5" cy="16.5" r="2.4"/></symbol>
+  <symbol id="i-keyboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="6" width="19" height="12" rx="2.4"/><path d="M6 10h.01M9.5 10h.01M13 10h.01M16.5 10h.01M6 14h9M17.5 14h.01" stroke-linecap="round" stroke-width="2"/></symbol>
+  <symbol id="i-win-min" viewBox="0 0 24 24"><path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="i-win-max" viewBox="0 0 24 24"><rect x="5.5" y="5.5" width="13" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="i-win-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18" cy="12" r="1.7"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M11 3.5l1.9 4.9 4.9 1.9-4.9 1.9L11 17.1 9.1 12.2 4.2 10.3l4.9-1.9z"/><path d="M18 14.2l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v4.5h-4.5"/></symbol>
+  <symbol id="i-chev-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-chev-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M9.5 7V5.4h5V7M6.5 7l.9 12.2h9.2L17.5 7"/><path d="M10.4 10.5v5.4M13.6 10.5v5.4"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 20l4.2-1 10-10a2 2 0 0 0-2.8-2.8l-10 10z"/><path d="M14.4 6.6l3 3"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.6V12l3 1.8"/></symbol>
+  <symbol id="i-folder-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.8A1.8 1.8 0 0 1 4.8 5h4.1l2 2.4h8.3A1.8 1.8 0 0 1 21 9.2v8A1.8 1.8 0 0 1 19.2 19H4.8A1.8 1.8 0 0 1 3 17.2z"/><path d="M12 10.5v5M9.5 13h5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></symbol>
+</svg>
+
+<div id="titlebar" data-tauri-drag-region>
+  <div class="tb-brand" data-tauri-drag-region>
+    <div class="brand-mark"><svg><use href="#i-play"/></svg></div>
+    <span>Dreeper</span>
+  </div>
+  <div class="tb-center">
+    <div class="tb-nav">
+      <button class="round-btn" id="navBack" title="Назад"><svg><use href="#i-chev-left"/></svg></button>
+      <button class="round-btn" id="navFwd" title="Вперёд"><svg><use href="#i-chev-right"/></svg></button>
+    </div>
+    <div class="search-box" id="searchBox">
+      <svg class="search-ico"><use href="#i-search"/></svg>
+      <input id="searchInput" type="text" placeholder="Поиск в библиотеке" spellcheck="false" autocomplete="off">
+      <button class="clear-btn hidden" id="searchClear"><svg><use href="#i-x"/></svg></button>
+      <kbd>/</kbd>
+    </div>
+  </div>
+  <div class="tb-right">
+    <button class="round-btn" id="btnHotkeysHelp" title="Горячие клавиши (?)"><svg><use href="#i-keyboard"/></svg></button>
+    <button class="round-btn" id="btnOpenSettings" title="Настройки"><svg><use href="#i-settings"/></svg></button>
+    <div class="win-controls">
+      <button id="winMin" title="Свернуть"><svg><use href="#i-win-min"/></svg></button>
+      <button id="winMax" title="Развернуть"><svg><use href="#i-win-max"/></svg></button>
+      <button id="winClose" title="Закрыть"><svg><use href="#i-win-close"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<div id="body">
+  <aside id="sidebar">
+    <div class="side-scroll">
+      <div class="side-top">
+        <button class="side-btn" id="btnAddFolder"><svg><use href="#i-folder-plus"/></svg><span>Добавить папку</span><kbd>Ctrl O</kbd></button>
+      </div>
+      <nav class="side-nav">
+        <button class="nav-item active" data-view="all"><span class="ni-ico"><svg><use href="#i-music"/></svg></span>Все треки</button>
+        <button class="nav-item" data-view="favorites"><span class="ni-ico"><svg><use href="#i-heart"/></svg></span>Избранное</button>
+      </nav>
+      <div class="side-section">
+        <div class="side-head"><span>Папки</span><button class="mini-add" id="btnAddFolderMini" title="Добавить папку"><svg><use href="#i-plus"/></svg></button></div>
+        <div id="folderList" class="side-list"></div>
+      </div>
+      <div class="side-section">
+        <div class="side-head"><span>Плейлисты</span><button class="mini-add" id="btnNewPlaylist" title="Создать плейлист"><svg><use href="#i-plus"/></svg></button></div>
+        <div id="playlistList" class="side-list"></div>
+      </div>
+    </div>
+    <div class="side-foot">
+      <div class="drop-hint">Перетащите папку или файлы прямо в окно</div>
+    </div>
+  </aside>
+
+  <main id="main">
+    <div id="mainScroll">
+      <header class="view-header" id="viewHeader">
+        <div class="vh-art" id="vhArt"><svg><use href="#i-music"/></svg></div>
+        <div class="vh-info">
+          <div class="vh-kind" id="vhKind">Библиотека</div>
+          <h1 id="vhTitle">Все треки</h1>
+          <div class="vh-meta" id="vhMeta">Добавьте папку с музыкой, чтобы начать</div>
+          <div class="vh-actions">
+            <button class="play-big" id="btnPlayView" title="Слушать"><svg><use href="#i-play"/></svg></button>
+            <button class="ghost-btn" id="btnShuffleView">Вперемешку</button>
+            <button class="ghost-btn hidden" id="btnRescan"><svg><use href="#i-refresh"/></svg>Обновить</button>
+            <button class="ghost-btn hidden" id="btnRenamePl"><svg><use href="#i-pencil"/></svg>Переименовать</button>
+            <button class="ghost-btn danger hidden" id="btnDeletePl"><svg><use href="#i-trash"/></svg>Удалить</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="table-head" id="tableHead">
+        <div class="c-idx">#</div>
+        <div class="c-title">Название</div>
+        <div class="c-artist">Исполнитель</div>
+        <div class="c-album">Альбом</div>
+        <div class="c-fav"></div>
+        <div class="c-dur"><svg><use href="#i-clock"/></svg></div>
+        <div class="c-more"></div>
+      </div>
+
+      <div id="trackList" class="track-list"></div>
+      <div id="emptyState" class="empty hidden"></div>
+      <div class="scroll-pad"></div>
+    </div>
+  </main>
+
+  <aside id="lyricsPanel" class="lyrics-panel">
+    <div class="ly-head">
+      <div class="ly-titles">
+        <div class="ly-label">Текст песни</div>
+        <div class="ly-track" id="lyTrack">Ничего не играет</div>
+      </div>
+      <div class="ly-actions">
+        <button class="round-btn sm" id="btnLyricsRefresh" title="Найти заново"><svg><use href="#i-refresh"/></svg></button>
+        <button class="round-btn sm" id="btnLyricsAi" title="Спросить ИИ"><svg><use href="#i-sparkles"/></svg></button>
+        <button class="round-btn sm" id="btnLyricsHide" title="Скрыть панель (L)"><svg><use href="#i-chev-right"/></svg></button>
+      </div>
+    </div>
+    <div class="ly-badges" id="lyBadges"></div>
+    <div class="ly-body" id="lyBody"></div>
+    <div class="ly-foot" id="lyFoot"></div>
+  </aside>
+</div>
+
+<footer id="player">
+  <div class="pl-now">
+    <div class="pl-art" id="plArt"><svg><use href="#i-music"/></svg></div>
+    <div class="pl-text">
+      <div class="pl-title" id="plTitle">Ничего не играет</div>
+      <div class="pl-artist" id="plArtist">Добавьте папку с музыкой</div>
+    </div>
+    <button class="round-btn sm fav-btn" id="btnFav" title="В избранное (F)"><svg><use href="#i-heart"/></svg></button>
+  </div>
+
+  <div class="pl-center">
+    <div class="pl-controls">
+      <button class="round-btn" id="btnShuffle" title="Перемешать (S)"><svg><use href="#i-shuffle"/></svg></button>
+      <button class="round-btn" id="btnPrev" title="Предыдущий (Ctrl ←)"><svg><use href="#i-prev"/></svg></button>
+      <button class="play-main" id="btnPlay" title="Играть (Space)"><svg><use href="#i-play"/></svg></button>
+      <button class="round-btn" id="btnNext" title="Следующий (Ctrl →)"><svg><use href="#i-next"/></svg></button>
+      <button class="round-btn" id="btnRepeat" title="Повтор (R)"><svg><use href="#i-repeat"/></svg></button>
+    </div>
+    <div class="pl-progress">
+      <span class="time" id="curTime">0:00</span>
+      <div class="bar" id="seekBar"><div class="bar-buffer" id="seekBuffer"></div><div class="bar-fill" id="seekFill"></div><div class="bar-knob" id="seekKnob"></div></div>
+      <span class="time" id="durTime">0:00</span>
+    </div>
+  </div>
+
+  <div class="pl-right">
+    <button class="round-btn sm" id="btnLyricsToggle" title="Текст песни (L)"><svg><use href="#i-list"/></svg></button>
+    <button class="round-btn sm" id="btnMute" title="Без звука (M)"><svg><use href="#i-volume"/></svg></button>
+    <div class="bar vol" id="volBar"><div class="bar-fill" id="volFill"></div><div class="bar-knob" id="volKnob"></div></div>
+    <button class="round-btn sm" id="btnQueue" title="Очередь" hidden></button>
+  </div>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<div id="ctxMenu" class="ctx hidden"></div>
+
+<div id="promptModal" class="modal hidden">
+  <div class="modal-card narrow">
+    <div class="modal-head"><h2 id="promptTitle">Новый плейлист</h2></div>
+    <div class="modal-body">
+      <input id="promptInput" class="text-input" type="text" placeholder="Название" maxlength="80">
+    </div>
+    <div class="modal-foot">
+      <button class="ghost-btn" data-close-modal>Отмена</button>
+      <button class="primary-btn" id="promptOk">Готово</button>
+    </div>
+  </div>
+</div>
+
+<div id="settingsModal" class="modal hidden">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h2>Настройки</h2>
+      <button class="round-btn sm" data-close-modal><svg><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <section class="field-group">
+        <h3>ИИ-агент для текстов</h3>
+        <p class="muted">Агент уточняет исполнителя и название по «грязному» имени файла, ищет точный текст в открытых базах и подсказывает контекст, если текста нет.</p>
+        <label class="field">
+          <span>Провайдер</span>
+          <select id="setProvider">
+            <option value="none">Выключен — только открытые базы</option>
+            <option value="ollama">Ollama — локальная модель</option>
+            <option value="gigachat">GigaChat — облако Сбера</option>
+          </select>
+        </label>
+        <div id="ollamaFields" class="field-grid hidden">
+          <label class="field"><span>Адрес Ollama</span><input id="setOllamaUrl" type="text" placeholder="http://127.0.0.1:11434"></label>
+          <label class="field"><span>Модель</span><input id="setOllamaModel" type="text" placeholder="qwen2.5:7b"></label>
+        </div>
+        <div id="gigaFields" class="field-grid hidden">
+          <label class="field"><span>Ключ авторизации (Authorization key)</span><input id="setGigaKey" type="password" placeholder="base64 ключ из личного кабинета GigaChat"></label>
+        </div>
+        <label class="check"><input type="checkbox" id="setAllowGen"><span>Если точного текста нет — показывать справку от ИИ (о чём песня)</span></label>
+        <div class="row">
+          <button class="ghost-btn" id="btnAiTest">Проверить подключение</button>
+          <span class="muted" id="aiTestResult"></span>
+        </div>
+      </section>
+
+      <section class="field-group">
+        <h3>Плеер</h3>
+        <label class="field inline">
+          <span>Шаг перемотки</span>
+          <input id="setSeekStep" type="number" min="1" max="60" step="1" value="5"> <span class="muted">сек</span>
+        </label>
+        <label class="check"><input type="checkbox" id="setAutoplayLyrics"><span>Автоматически искать текст при смене трека</span></label>
+      </section>
+
+      <section class="field-group">
+        <h3>Библиотека</h3>
+        <p class="muted">Найдено папок: <b id="infoFolders">0</b> · треков: <b id="infoTracks">0</b> · плейлистов: <b id="infoPlaylists">0</b></p>
+        <p class="muted tiny">Данные хранятся в <span id="infoStateDir" class="mono">%APPDATA%</span></p>
+      </section>
+    </div>
+    <div class="modal-foot">
+      <button class="ghost-btn" data-close-modal>Закрыть</button>
+      <button class="primary-btn" id="btnSettingsSave">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<div id="hotkeysModal" class="modal hidden">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h2>Горячие клавиши</h2>
+      <button class="round-btn sm" data-close-modal><svg><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="hk-grid">
+        <div class="hk-row"><span>Играть / пауза</span><kbd>Space</kbd></div>
+        <div class="hk-row"><span>Следующий / предыдущий трек</span><kbd>Ctrl</kbd><kbd>→</kbd><kbd>←</kbd></div>
+        <div class="hk-row"><span>Перемотка ± шаг</span><kbd>→</kbd><kbd>←</kbd></div>
+        <div class="hk-row"><span>Громкость</span><kbd>↑</kbd><kbd>↓</kbd></div>
+        <div class="hk-row"><span>Без звука</span><kbd>M</kbd></div>
+        <div class="hk-row"><span>Перемешать</span><kbd>S</kbd></div>
+        <div class="hk-row"><span>Режим повтора</span><kbd>R</kbd></div>
+        <div class="hk-row"><span>В избранное</span><kbd>F</kbd></div>
+        <div class="hk-row"><span>Панель текста</span><kbd>L</kbd></div>
+        <div class="hk-row"><span>Поиск</span><kbd>/</kbd></div>
+        <div class="hk-row"><span>Добавить папку</span><kbd>Ctrl</kbd><kbd>O</kbd></div>
+        <div class="hk-row"><span>Новый плейлист</span><kbd>Ctrl</kbd><kbd>N</kbd></div>
+        <div class="hk-row"><span>Плей / пауза (глобально, Alt)</span><kbd>Alt</kbd><kbd>Space</kbd></div>
+        <div class="hk-row"><span>Треки ±1 (глобально, Alt)</span><kbd>Alt</kbd><kbd>Ctrl</kbd><kbd>→</kbd></div>
+        <div class="hk-row"><span>Справка по клавишам</span><kbd>?</kbd></div>
+        <div class="hk-row"><span>Настройки</span><kbd>Ctrl</kbd><kbd>,</kbd></div>
+      </div>
+      <p class="muted tiny">Глобальные сочетания с Alt работают, даже когда окно Dreeper не в фокусе.</p>
+    </div>
+    <div class="modal-foot"><button class="primary-btn" data-close-modal>Понятно</button></div>
+  </div>
+</div>
+
+<audio id="audio" preload="metadata"></audio>
+<script src="app.js"></script>
+</body>
+</html>
