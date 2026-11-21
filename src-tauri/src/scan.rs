@@ -18,7 +18,6 @@ pub struct Track {
     pub duration: f64,
     pub track_no: u32,
     pub disc_no: u32,
-    pub year: u32,
     pub ext: String,
     pub size: u64,
 }
@@ -46,7 +45,7 @@ fn split_name(stem: &str) -> (String, String) {
 }
 
 pub fn read_track(path: &Path) -> Track {
-    use lofty::file::TaggedFileExt;
+    use lofty::file::{AudioFile, TaggedFileExt};
     use lofty::tag::Accessor;
 
     let file_name = path
@@ -72,7 +71,6 @@ pub fn read_track(path: &Path) -> Track {
         duration: 0.0,
         track_no: 0,
         disc_no: 0,
-        year: 0,
         ext,
         size: std::fs::metadata(path).map(|m| m.len()).unwrap_or(0),
     };
@@ -91,7 +89,6 @@ pub fn read_track(path: &Path) -> Track {
             }
             t.track_no = tag.track().unwrap_or(0);
             t.disc_no = tag.disk().unwrap_or(0);
-            t.year = tag.year().unwrap_or(0);
         }
     }
 
